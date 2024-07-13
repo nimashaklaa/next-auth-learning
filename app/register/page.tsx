@@ -2,6 +2,7 @@ import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import Link from "next/link";
 import {IconBrandGithub, IconBrandGoogle} from "@tabler/icons-react";
+import {register} from "@/action/user";
 
 const Register = async () =>{
     return(
@@ -60,7 +61,8 @@ const Register = async () =>{
                     Already have an account? <Link href="/login">Login</Link>
                 </p>
                 <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-                <section className="flex flex-col space-y-4">
+            </form>
+            <section className="flex flex-col space-y-4">
                     <form>
                         <button className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
                                 type="submit">
@@ -80,8 +82,6 @@ const Register = async () =>{
                         </button>
                     </form>
                 </section>
-
-            </form>
         </div>
     )
 }

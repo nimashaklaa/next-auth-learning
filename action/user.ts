@@ -3,6 +3,7 @@ import connectDB from "@/lib/db"
 import {User} from "@/model/User";
 
 import { redirect } from "next/navigation";
+import {hash} from "bcryptjs"
 
 
 const register = async (formData:FormData)=>{
@@ -21,7 +22,9 @@ const register = async (formData:FormData)=>{
 
     if(existingUser) throw new Error("User already exists");
 
-    await User.create({firstName,lastName,email,password})
+    const hashedPassword = await hash(password, 12)
+
+    await User.create({firstName,lastName,email,password:hashedPassword})
 
     console.log('User created successfully 🥂')
 
@@ -29,3 +32,4 @@ const register = async (formData:FormData)=>{
 
 
 }
+export {register};
