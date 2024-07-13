@@ -5,7 +5,7 @@ import { login } from "@/action/user";
 import {IconBrandGithub, IconBrandGoogle} from "@tabler/icons-react";
 import {signIn , auth} from "@/auth"
 import { redirect } from "next/navigation";
-import { getSession } from "next-auth/react";
+import { getSession } from "@/lib/getSession";
 
 const Login = async()=>{
 
@@ -15,7 +15,7 @@ const Login = async()=>{
 
     return(
         <div className="mt-10 max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white border border-[#121212]  dark:bg-black">
-            <form className="my-8" action={login}>
+            <form className="my-8" action={login} >
                 <Label htmlFor="email">
                     Email Address
                 </Label>

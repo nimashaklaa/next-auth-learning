@@ -6,9 +6,10 @@ import {hash} from "bcryptjs"
 import { CredentialsSignin } from "next-auth";
 import {signIn} from "@/auth"
 
-const login =async(formData:FormData)=>{
+const login =async(formData:FormData) =>{
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
+    console.log("email and password",email,password)
     try{
         const result = await signIn('credentials',{
             redirect: false,
@@ -52,6 +53,11 @@ const register = async (formData:FormData)=>{
 
     redirect('/login')
 
+};
 
+const fetchAllUsers = async()=>{
+    await connectDB();
+    const users = await User.find({});
+    return users;
 }
-export {register, login};
+export {register, login ,fetchAllUsers};
