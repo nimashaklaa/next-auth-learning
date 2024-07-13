@@ -5,10 +5,11 @@ import { login } from "@/action/user";
 import {IconBrandGithub, IconBrandGoogle} from "@tabler/icons-react";
 import {signIn , auth} from "@/auth"
 import { redirect } from "next/navigation";
+import { getSession } from "next-auth/react";
 
 const Login = async()=>{
 
-    const session = await auth()
+    const session = await getSession();
     const user = session?.user;
     if(user) redirect("/")
 
