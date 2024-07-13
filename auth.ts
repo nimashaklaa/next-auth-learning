@@ -1,9 +1,8 @@
 import NextAuth, { CredentialsSignin } from "next-auth"
-import credentials from "next-auth/providers/credentials"
-
 import Credentials from "next-auth/providers/credentials"
 import connectDB from "./lib/db"
 import { User } from "./model/User"
+import { compare } from "bcryptjs"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -34,7 +33,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             if(!user.password){
                 throw new Error('Invalied email or password') 
             }
+
+            const isMatched = await compare(password, user.password)
+
+            if(!isMatched){
+                throw new Error('Invalied email or password')
+            }
+            const userData ={
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role,
+                id:user._id
+            }
+
+            return userData;
+
         }
     })
 ],
+pages:{
+    signIn:'/login',
+}
+
 })
